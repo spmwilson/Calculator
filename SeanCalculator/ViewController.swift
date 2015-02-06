@@ -10,16 +10,66 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    @IBOutlet weak var display: UILabel!
+    
+    var userIsCurrentlyTypingANumber = false
+    
+    @IBAction func numberPressed(sender: UIButton) {
+        let number = sender.currentTitle!
+        if userIsCurrentlyTypingANumber {
+            display.text = display.text! + number
+        }
+        else {
+            display.text = number
+            userIsCurrentlyTypingANumber = true
+        }
+    }
+    var operandStack = Array<Double>()
+    
+    @IBAction func enter() {
+        operandStack.append(displayValue)
+        userIsCurrentlyTypingANumber = false
+        println("\(operandStack)")
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func operandPressed(sender: UIButton) {
+        let operation = sender.currentTitle!
+        if userIsCurrentlyTypingANumber {
+            enter()
+        }
+
+        switch operation{
+            case "×": calculateOperand {$0 * $1}
+            case "÷": calculateOperand {$1 / $0}
+            case "+": calculateOperand {$0 + $1}
+            case "−": calculateOperand {$0 - $1}
+            case "√": calculateOperand {sqrt($0)}
+            default: break
+        }
     }
-
-
+    
+    func calculateOperand (operation: (Double, Double) -> Double) {
+        
+        if operandStack.count >= 2 {
+            displayValue = operation(operandStack.removeLast(),operandStack.removeLast())
+            enter()
+        }
+    }
+    func calculateOperand (operation: Double ->Double) {
+        if operandStack.count >= 1{
+            displayValue = operation(operandStack.removeLast())
+            enter()
+        }
+    }
+    
+    var displayValue: Double{
+        get {
+            return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
+        }
+        set {
+            display.text = "\(newValue)"
+            userIsCurrentlyTypingANumber = false
+        }
+    }
 }
 

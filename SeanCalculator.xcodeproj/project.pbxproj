@@ -77,11 +77,8 @@
 		140820F41A857AE9002FD240 /* SeanCalculator */ = {
 			isa = PBXGroup;
 			children = (
-				140820F71A857AE9002FD240 /* AppDelegate.swift */,
 				140820F91A857AE9002FD240 /* ViewController.swift */,
 				140820FB1A857AE9002FD240 /* Main.storyboard */,
-				140820FE1A857AE9002FD240 /* Images.xcassets */,
-				140821001A857AE9002FD240 /* LaunchScreen.xib */,
 				140820F51A857AE9002FD240 /* Supporting Files */,
 			);
 			path = SeanCalculator;
@@ -90,6 +87,9 @@
 		140820F51A857AE9002FD240 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				140820F71A857AE9002FD240 /* AppDelegate.swift */,
+				140820FE1A857AE9002FD240 /* Images.xcassets */,
+				140821001A857AE9002FD240 /* LaunchScreen.xib */,
 				140820F61A857AE9002FD240 /* Info.plist */,
 			);
 			name = "Supporting Files";
