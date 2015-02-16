@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var display: UILabel!
+    @IBOutlet weak var history: UILabel!
     
     var userIsCurrentlyTypingANumber = false
     
@@ -31,6 +32,10 @@ class ViewController: UIViewController {
         userIsCurrentlyTypingANumber = false
         println("\(operandStack)")
     }
+    @IBAction func floatingPoint(sender: UIButton) {
+        display.text = display.text! + "."
+        userIsCurrentlyTypingANumber = true
+    }
 
     @IBAction func operandPressed(sender: UIButton) {
         let operation = sender.currentTitle!
@@ -44,8 +49,11 @@ class ViewController: UIViewController {
             case "+": calculateOperand {$0 + $1}
             case "−": calculateOperand {$0 - $1}
             case "√": calculateOperand {sqrt($0)}
+            case "sin": calculateOperand {sin($0)}
+            case "cos": calculateOperand {cos($0)}
             default: break
         }
+        history.text = operation
     }
     
     func calculateOperand (operation: (Double, Double) -> Double) {
@@ -60,6 +68,11 @@ class ViewController: UIViewController {
             displayValue = operation(operandStack.removeLast())
             enter()
         }
+    }
+    @IBAction func clearDisplay() {
+        operandStack.removeAll(keepCapacity: false)
+        display.text = "0"
+        userIsCurrentlyTypingANumber = false
     }
     
     var displayValue: Double{

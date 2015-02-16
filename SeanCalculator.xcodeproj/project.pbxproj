@@ -161,6 +161,7 @@
 				TargetAttributes = {
 					140820F11A857AE9002FD240 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = A45BVWE599;
 					};
 					140821061A857AE9002FD240 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -338,6 +339,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SeanCalculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -348,6 +350,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SeanCalculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -407,6 +410,7 @@
 				140821131A857AE9002FD240 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		140821141A857AE9002FD240 /* Build configuration list for PBXNativeTarget "SeanCalculatorTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +419,7 @@
 				140821161A857AE9002FD240 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
