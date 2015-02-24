@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     
     var userIsCurrentlyTypingANumber = false
     
+    var brain = CalculatorBrain()
+    
     @IBAction func numberPressed(sender: UIButton) {
         let number = sender.currentTitle!
         if userIsCurrentlyTypingANumber {
@@ -25,12 +27,15 @@ class ViewController: UIViewController {
             userIsCurrentlyTypingANumber = true
         }
     }
-    var operandStack = Array<Double>()
     
     @IBAction func enter() {
-        operandStack.append(displayValue)
         userIsCurrentlyTypingANumber = false
-        println("\(operandStack)")
+        if let result = brain.pushOperand(displayValue){
+            displayValue = result
+        }else {
+            //Make display value take an optional for HW2
+            displayValue = 0
+        }
     }
     @IBAction func floatingPoint(sender: UIButton) {
         display.text = display.text! + "."
@@ -38,40 +43,24 @@ class ViewController: UIViewController {
     }
 
     @IBAction func operandPressed(sender: UIButton) {
-        let operation = sender.currentTitle!
         if userIsCurrentlyTypingANumber {
             enter()
         }
-
-        switch operation{
-            case "×": calculateOperand {$0 * $1}
-            case "÷": calculateOperand {$1 / $0}
-            case "+": calculateOperand {$0 + $1}
-            case "−": calculateOperand {$0 - $1}
-            case "√": calculateOperand {sqrt($0)}
-            case "sin": calculateOperand {sin($0)}
-            case "cos": calculateOperand {cos($0)}
-            default: break
+        if let operation = sender.currentTitle {
+            if let result = brain.performOperation(operation){
+            displayValue = result
+            }
+        } else {
+            displayValue = 0
         }
-        history.text = operation
-    }
-    
-    func calculateOperand (operation: (Double, Double) -> Double) {
         
-        if operandStack.count >= 2 {
-            displayValue = operation(operandStack.removeLast(),operandStack.removeLast())
-            enter()
-        }
+        
     }
-    func calculateOperand (operation: Double ->Double) {
-        if operandStack.count >= 1{
-            displayValue = operation(operandStack.removeLast())
-            enter()
-        }
-    }
+
     @IBAction func clearDisplay() {
-        operandStack.removeAll(keepCapacity: false)
+        brain.empty()
         display.text = "0"
+        history.text = " "
         userIsCurrentlyTypingANumber = false
     }
     
