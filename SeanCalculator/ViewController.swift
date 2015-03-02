@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     
     var brain = CalculatorBrain()
     
+    
     @IBAction func numberPressed(sender: UIButton) {
         let number = sender.currentTitle!
         if userIsCurrentlyTypingANumber {
@@ -32,6 +33,7 @@ class ViewController: UIViewController {
         userIsCurrentlyTypingANumber = false
         if let result = brain.pushOperand(displayValue){
             displayValue = result
+            setHistory()
         }else {
             //Make display value take an optional for HW2
             displayValue = 0
@@ -48,7 +50,8 @@ class ViewController: UIViewController {
         }
         if let operation = sender.currentTitle {
             if let result = brain.performOperation(operation){
-            displayValue = result
+                displayValue = result
+                setHistory()
             }
         } else {
             displayValue = 0
@@ -72,6 +75,10 @@ class ViewController: UIViewController {
             display.text = "\(newValue)"
             userIsCurrentlyTypingANumber = false
         }
+    }
+    
+    func setHistory (){
+        history.text = brain.opHistory.removeLast()
     }
 }
 

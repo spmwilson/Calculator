@@ -31,8 +31,8 @@ class CalculatorBrain
     }
     
     private var opStack = [Op]()
-    
     private var knownOps = [String:Op]()
+    var opHistory: [String] = []
     
     init() {
         func learnOp(op: Op) {
@@ -79,6 +79,12 @@ class CalculatorBrain
     func evaluate() -> Double? {
         let (result, remainder) = evaluate(opStack)
         println("\(opStack) = \(result) with \(remainder) left over")
+        if result != nil {
+            opHistory.append("\(opStack) = \(result!)")
+        }
+        else {
+            opHistory.append("\(opStack)")
+        }
         return result
     }
     
@@ -96,5 +102,6 @@ class CalculatorBrain
     }
     func empty(){
         opStack.removeAll(keepCapacity: true)
+        opHistory.removeAll(keepCapacity: true)
     }
 }
